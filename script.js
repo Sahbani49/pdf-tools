@@ -143,50 +143,67 @@ function loadImage(file) {
 
     });
                                             }
-let dragStartIndex = null;
+let touchStartIndex = null;
 
-document.addEventListener("dragstart", function(e){
+document.addEventListener("touchstart", function(e){
 
-    if(e.target.classList.contains("image-number")){
+    const number = e.target.closest(".image-number");
 
-        const card = e.target.closest(".image-card");
+    if(number){
 
-        dragStartIndex = Array.from(
+        const card = number.closest(".image-card");
+
+        touchStartIndex = Array.from(
             card.parentNode.children
         ).indexOf(card);
 
-        e.dataTransfer.effectAllowed = "move";
     }
 
 });
 
 
-document.addEventListener("dragover", function(e){
+document.addEventListener("touchmove", function(e){
 
     e.preventDefault();
 
-});
+}, {passive:false});
 
 
-document.addEventListener("drop", function(e){
+document.addEventListener("touchend", function(e){
 
-    const card = e.target.closest(".image-card");
+    if(touchStartIndex === null) return;
 
-    if(card && dragStartIndex !== null){
+
+    const touch = e.changedTouches[0];
+
+    const element = document.elementFromPoint(
+        touch.clientX,
+        touch.clientY
+    );
+
+
+    const targetCard = element.closest(".image-card");
+
+
+    if(targetCard){
 
         const dropIndex = Array.from(
-            card.parentNode.children
-        ).indexOf(card);
+            targetCard.parentNode.children
+        ).indexOf(targetCard);
 
 
-        const movedFile = selectedFiles.splice(dragStartIndex, 1)[0];
+        if(dropIndex !== touchStartIndex){
 
-        selectedFiles.splice(dropIndex, 0, movedFile);
+            const movedFile = selectedFiles.splice(touchStartIndex,1)[0];
 
+            selectedFiles.splice(dropIndex,0,movedFile);
 
-        showPreview();
+            showPreview();
+        }
 
-        dragStartIndex = null;
     }
+
+
+    touchStartIndex = null;
 
 });
