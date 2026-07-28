@@ -5,9 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PDF Tools - Free PDF Converter</title>
+<title>PDF Tools - Convert Images to PDF</title>
 
-<meta name="description" content="Free online PDF tools to convert images to PDF easily and quickly.">
+<meta name="description" content="Convert images to PDF online for free.">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 body {
@@ -29,10 +31,6 @@ h1 {
     color: #222;
 }
 
-p {
-    color: #555;
-}
-
 input {
     margin: 20px;
 }
@@ -49,11 +47,6 @@ button {
 button:hover {
     opacity: 0.8;
 }
-
-footer {
-    margin-top: 30px;
-    font-size: 14px;
-}
 </style>
 
 </head>
@@ -66,23 +59,65 @@ footer {
 
 <h2>Convert Images to PDF</h2>
 
-<p>
-Convert your images into a PDF file quickly and easily.
-</p>
+<p>Select your images and convert them into a PDF file.</p>
 
-<input type="file" accept="image/*" multiple>
+<input type="file" id="images" accept="image/*" multiple>
 
 <br>
 
-<button>
-Convert to PDF
-</button>
-
-<footer>
-<p>Free online PDF tools</p>
-</footer>
+<button onclick="convertPDF()">Convert to PDF</button>
 
 </div>
 
+
+<script>
+
+async function convertPDF() {
+
+const files = document.getElementById("images").files;
+
+if(files.length === 0){
+    alert("Please select images first.");
+    return;
+}
+
+const { jsPDF } = window.jspdf;
+
+let pdf = new jsPDF();
+
+for(let i = 0; i < files.length; i++){
+
+    let image = await readFile(files[i]);
+
+    if(i > 0){
+        pdf.addPage();
+    }
+
+    pdf.addImage(image, 'JPEG', 10, 10, 190, 270);
+}
+
+pdf.save("converted-images.pdf");
+
+}
+
+
+function readFile(file){
+
+return new Promise((resolve)=>{
+
+let reader = new FileReader();
+
+reader.onload = function(e){
+    resolve(e.target.result);
+};
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+</script>
+
 </body>
-  </html>
+</html>
