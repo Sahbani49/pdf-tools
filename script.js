@@ -29,6 +29,7 @@ function showPreview() {
 
         const number = document.createElement("span");
         number.className = "image-number";
+number.draggable = true;
         number.textContent = index + 1;
 
 
@@ -146,12 +147,15 @@ let dragStartIndex = null;
 
 document.addEventListener("dragstart", function(e){
 
-    if(e.target.classList.contains("image-card")){
+    if(e.target.classList.contains("image-number")){
+
+        const card = e.target.closest(".image-card");
 
         dragStartIndex = Array.from(
-            e.target.parentNode.children
-        ).indexOf(e.target);
+            card.parentNode.children
+        ).indexOf(card);
 
+        e.dataTransfer.effectAllowed = "move";
     }
 
 });
@@ -166,19 +170,23 @@ document.addEventListener("dragover", function(e){
 
 document.addEventListener("drop", function(e){
 
-    if(e.target.classList.contains("image-card")){
+    const card = e.target.closest(".image-card");
+
+    if(card && dragStartIndex !== null){
 
         const dropIndex = Array.from(
-            e.target.parentNode.children
-        ).indexOf(e.target);
+            card.parentNode.children
+        ).indexOf(card);
 
 
-        const movedFile = selectedFiles.splice(dragStartIndex,1)[0];
+        const movedFile = selectedFiles.splice(dragStartIndex, 1)[0];
 
-        selectedFiles.splice(dropIndex,0,movedFile);
+        selectedFiles.splice(dropIndex, 0, movedFile);
+
 
         showPreview();
 
+        dragStartIndex = null;
     }
 
 });
