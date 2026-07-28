@@ -24,6 +24,12 @@ function showPreview() {
 
         const card = document.createElement("div");
         card.className = "image-card";
+        card.draggable = true;
+
+
+        const number = document.createElement("span");
+        number.className = "image-number";
+        number.textContent = index + 1;
 
 
         const img = document.createElement("img");
@@ -43,12 +49,11 @@ function showPreview() {
         };
 
 
-        card.draggable = true;
+        card.appendChild(remove);
+        card.appendChild(number);
+        card.appendChild(img);
 
-card.appendChild(remove);
-card.appendChild(img);
-
-preview.appendChild(card);
+        preview.appendChild(card);
 
     });
 }
@@ -96,49 +101,12 @@ function loadImage(file) {
         const reader = new FileReader();
 
         reader.onload = function(e){
+
             resolve(e.target.result);
+
         };
 
         reader.readAsDataURL(file);
 
     });
-    }
-let dragStartIndex;
-
-document.addEventListener("dragstart", function(e){
-
-    if(e.target.classList.contains("image-card")){
-
-        dragStartIndex = Array.from(
-            e.target.parentNode.children
-        ).indexOf(e.target);
-
-    }
-
-});
-
-
-document.addEventListener("dragover", function(e){
-
-    e.preventDefault();
-
-});
-
-
-document.addEventListener("drop", function(e){
-
-    if(e.target.classList.contains("image-card")){
-
-        const dropIndex = Array.from(
-            e.target.parentNode.children
-        ).indexOf(e.target);
-
-
-        const moved = selectedFiles.splice(dragStartIndex,1)[0];
-
-        selectedFiles.splice(dropIndex,0,moved);
-
-        showPreview();
-    }
-
-});
+                                            }
