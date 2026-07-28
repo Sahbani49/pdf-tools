@@ -1,45 +1,62 @@
+let selectedFiles = [];
+
 function previewImages() {
+
+    const input = document.getElementById("images");
+
+    selectedFiles = Array.from(input.files);
+
+    showPreview();
+}
+
+
+function showPreview() {
 
     const preview = document.getElementById("preview");
     preview.innerHTML = "";
 
-    const files = document.getElementById("images").files;
-
     document.getElementById("count").textContent =
-        files.length + (files.length === 1 ? " image selected" : " images selected");
+        selectedFiles.length +
+        (selectedFiles.length === 1 ? " image selected" : " images selected");
 
 
-    for (let i = 0; i < files.length; i++) {
-
-        const file = files[i];
+    selectedFiles.forEach((file, index) => {
 
         const card = document.createElement("div");
         card.className = "image-card";
-
-
-        const number = document.createElement("span");
-        number.className = "image-number";
-        number.textContent = i + 1;
 
 
         const img = document.createElement("img");
         img.src = URL.createObjectURL(file);
 
 
-        card.appendChild(number);
+        const remove = document.createElement("button");
+        remove.innerHTML = "✖";
+        remove.className = "remove-btn";
+
+
+        remove.onclick = function() {
+
+            selectedFiles.splice(index, 1);
+
+            showPreview();
+        };
+
+
+        card.appendChild(remove);
         card.appendChild(img);
 
         preview.appendChild(card);
-    }
+
+    });
 }
 
 
 
 async function convertPDF() {
 
-    const files = document.getElementById("images").files;
+    if (!selectedFiles.length) {
 
-    if (!files.length) {
         alert("Please select at least one image.");
         return;
     }
@@ -50,9 +67,9 @@ async function convertPDF() {
     const pdf = new jsPDF("p", "mm", "a4");
 
 
-    for (let i = 0; i < files.length; i++) {
+    for (let i = 0; i < selectedFiles.length; i++) {
 
-        const dataUrl = await loadImage(files[i]);
+        const dataUrl = await loadImage(selectedFiles[i]);
 
 
         if (i > 0) {
@@ -60,14 +77,8 @@ async function convertPDF() {
         }
 
 
-        pdf.addImage(
-            dataUrl,
-            "JPEG",
-            10,
-            10,
-            190,
-            277
-        );
+        pdf.addImage(dataUrl, "JPEG", 10, 10, 190, 277);
+
     }
 
 
@@ -76,22 +87,17 @@ async function convertPDF() {
 
 
 
-
 function loadImage(file) {
 
-    return new Promise((resolve) => {
+    return new Promise((resolve)=>{
 
         const reader = new FileReader();
 
-
-        reader.onload = function(e) {
-
+        reader.onload = function(e){
             resolve(e.target.result);
-
         };
-
 
         reader.readAsDataURL(file);
 
     });
-        }
+    }
