@@ -110,3 +110,43 @@ function loadImage(file) {
 
     });
                                             }
+let dragStartIndex = null;
+
+document.addEventListener("dragstart", function(e){
+
+    if(e.target.classList.contains("image-card")){
+
+        dragStartIndex = Array.from(
+            e.target.parentNode.children
+        ).indexOf(e.target);
+
+    }
+
+});
+
+
+document.addEventListener("dragover", function(e){
+
+    e.preventDefault();
+
+});
+
+
+document.addEventListener("drop", function(e){
+
+    if(e.target.classList.contains("image-card")){
+
+        const dropIndex = Array.from(
+            e.target.parentNode.children
+        ).indexOf(e.target);
+
+
+        const movedFile = selectedFiles.splice(dragStartIndex,1)[0];
+
+        selectedFiles.splice(dropIndex,0,movedFile);
+
+        showPreview();
+
+    }
+
+});
