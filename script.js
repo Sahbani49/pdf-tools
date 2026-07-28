@@ -43,10 +43,12 @@ function showPreview() {
         };
 
 
-        card.appendChild(remove);
-        card.appendChild(img);
+        card.draggable = true;
 
-        preview.appendChild(card);
+card.appendChild(remove);
+card.appendChild(img);
+
+preview.appendChild(card);
 
     });
 }
