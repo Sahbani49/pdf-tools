@@ -85,3 +85,32 @@ footer{
     padding:25px;
     color:#666;
     }
+.upload-box{
+    border:3px dashed #42a5f5;
+    border-radius:15px;
+    padding:40px 20px;
+    text-align:center;
+    cursor:pointer;
+    background:#f8fbff;
+    transition:.3s;
+    margin:25px 0;
+}
+
+.upload-box:hover{
+    background:#eef6ff;
+    border-color:#1976d2;
+}
+
+.upload-icon{
+    font-size:60px;
+    margin-bottom:10px;
+}
+
+.upload-box h3{
+    color:#1565c0;
+    margin-bottom:8px;
+}
+
+.upload-box p{
+    color:#777;
+} 
