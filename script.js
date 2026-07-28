@@ -27,12 +27,11 @@ function showPreview() {
         card.draggable = true;
 
 
-        const number = document.createElement("span");
-        number.className = "image-number";
+    
 const number = document.createElement("span");
 number.className = "image-number";
 number.textContent = index + 1;
-        number.textContent = index + 1;
+        
 
 
         const img = document.createElement("img");
