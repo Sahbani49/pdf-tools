@@ -61,7 +61,9 @@ button:hover {
 
 <p>Select your images and convert them into a PDF file.</p>
 
-<input type="file" id="images" accept="image/*" multiple>
+<input type="file" id="images" accept="image/*" multiple onchange="previewImages()">
+
+<div id="preview" style="margin-top:20px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;"></div>
 
 <br>
 
@@ -115,6 +117,32 @@ reader.readAsDataURL(file);
 
 });
 
+} 
+
+function previewImages(){
+
+const preview = document.getElementById("preview");
+preview.innerHTML = "";
+
+const files = document.getElementById("images").files;
+
+for(let file of files){
+
+const img = document.createElement("img");
+
+img.src = URL.createObjectURL(file);
+
+img.style.width = "120px";
+img.style.height = "120px";
+img.style.objectFit = "cover";
+img.style.borderRadius = "8px";
+img.style.border = "1px solid #ddd";
+
+preview.appendChild(img);
+
+}
+
+    
 }
 
 </script>
