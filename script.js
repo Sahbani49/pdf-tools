@@ -24,14 +24,11 @@ function showPreview() {
 
         const card = document.createElement("div");
         card.className = "image-card";
-        card.draggable = true;
 
 
-    
-const number = document.createElement("span");
-number.className = "image-number";
-number.textContent = index + 1;
-        
+        const number = document.createElement("span");
+        number.className = "image-number";
+        number.textContent = index + 1;
 
 
         const img = document.createElement("img");
@@ -42,7 +39,6 @@ number.textContent = index + 1;
         remove.innerHTML = "✖";
         remove.className = "remove-btn";
 
-
         remove.onclick = function() {
 
             selectedFiles.splice(index, 1);
@@ -52,42 +48,44 @@ number.textContent = index + 1;
 
 
         const up = document.createElement("button");
-up.innerHTML = "⬆️";
-up.className = "move-btn";
+        up.innerHTML = "⬆️";
+        up.className = "move-btn";
 
-up.onclick = function(){
-    if(index > 0){
-        const temp = selectedFiles[index];
-        selectedFiles[index] = selectedFiles[index - 1];
-        selectedFiles[index - 1] = temp;
+        up.onclick = function(){
 
-        showPreview();
-    }
-};
+            if(index > 0){
 
+                [selectedFiles[index], selectedFiles[index - 1]] =
+                [selectedFiles[index - 1], selectedFiles[index]];
 
-const down = document.createElement("button");
-down.innerHTML = "⬇️";
-down.className = "move-btn";
-
-down.onclick = function(){
-    if(index < selectedFiles.length - 1){
-        const temp = selectedFiles[index];
-        selectedFiles[index] = selectedFiles[index + 1];
-        selectedFiles[index + 1] = temp;
-
-        showPreview();
-    }
-};
+                showPreview();
+            }
+        };
 
 
-card.appendChild(remove);
-card.appendChild(number);
-card.appendChild(img);
-card.appendChild(up);
-card.appendChild(down);
+        const down = document.createElement("button");
+        down.innerHTML = "⬇️";
+        down.className = "move-btn";
 
-preview.appendChild(card);
+        down.onclick = function(){
+
+            if(index < selectedFiles.length - 1){
+
+                [selectedFiles[index], selectedFiles[index + 1]] =
+                [selectedFiles[index + 1], selectedFiles[index]];
+
+                showPreview();
+            }
+        };
+
+
+        card.appendChild(remove);
+        card.appendChild(number);
+        card.appendChild(img);
+        card.appendChild(up);
+        card.appendChild(down);
+
+        preview.appendChild(card);
 
     });
 }
@@ -113,8 +111,10 @@ async function convertPDF() {
         const dataUrl = await loadImage(selectedFiles[i]);
 
 
-        if (i > 0) {
+        if(i > 0){
+
             pdf.addPage();
+
         }
 
 
@@ -124,11 +124,12 @@ async function convertPDF() {
 
 
     pdf.save("converted.pdf");
+
 }
 
 
 
-function loadImage(file) {
+function loadImage(file){
 
     return new Promise((resolve)=>{
 
@@ -143,64 +144,5 @@ function loadImage(file) {
         reader.readAsDataURL(file);
 
     });
-                                            }
-let touchStartIndex = null;
 
-document.addEventListener("touchstart", function(e){
-
-    const number = e.target.closest(".image-number");
-
-    if(number){
-
-        const card = number.closest(".image-card");
-
-        touchStartIndex = Array.from(
-            card.parentNode.children
-        ).indexOf(card);
-
-    }
-
-});
-
-
-
-
-
-document.addEventListener("touchend", function(e){
-
-    if(touchStartIndex === null) return;
-
-
-    const touch = e.changedTouches[0];
-
-    const element = document.elementFromPoint(
-        touch.clientX,
-        touch.clientY
-    );
-
-
-    const targetCard = element.closest(".image-card");
-
-
-    if(targetCard){
-
-        const dropIndex = Array.from(
-            targetCard.parentNode.children
-        ).indexOf(targetCard);
-
-
-        if(dropIndex !== touchStartIndex){
-
-            const movedFile = selectedFiles.splice(touchStartIndex,1)[0];
-
-            selectedFiles.splice(dropIndex,0,movedFile);
-
-            showPreview();
         }
-
-    }
-
-
-    touchStartIndex = null;
-
-});
