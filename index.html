@@ -36,12 +36,23 @@ No images selected
 </p>
 
 
+<label for="images" class="upload-box">
+
+<div class="upload-icon">📄</div>
+
+<h3>Drop your images here</h3>
+
+<p>or click to browse</p>
+
 <input
 type="file"
 id="images"
 accept="image/*"
 multiple
-onchange="previewImages()">
+onchange="previewImages()"
+hidden>
+
+</label>
 
 <div id="preview"></div>
 
