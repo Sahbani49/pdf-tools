@@ -135,3 +135,24 @@ footer{
 .remove-btn:hover{
     background:#b71c1c;
 } 
+.image-card{
+    position:relative;
+}
+
+.remove-btn{
+    position:absolute;
+    top:5px;
+    right:5px;
+    background:#e53935;
+    color:white;
+    border:none;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    cursor:pointer;
+    z-index:2;
+}
+
+.remove-btn:hover{
+    background:#b71c1c;
+} 
