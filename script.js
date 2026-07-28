@@ -49,11 +49,43 @@ function showPreview() {
         };
 
 
-        card.appendChild(remove);
-        card.appendChild(number);
-        card.appendChild(img);
+        const up = document.createElement("button");
+up.innerHTML = "⬆️";
+up.className = "move-btn";
 
-        preview.appendChild(card);
+up.onclick = function(){
+    if(index > 0){
+        const temp = selectedFiles[index];
+        selectedFiles[index] = selectedFiles[index - 1];
+        selectedFiles[index - 1] = temp;
+
+        showPreview();
+    }
+};
+
+
+const down = document.createElement("button");
+down.innerHTML = "⬇️";
+down.className = "move-btn";
+
+down.onclick = function(){
+    if(index < selectedFiles.length - 1){
+        const temp = selectedFiles[index];
+        selectedFiles[index] = selectedFiles[index + 1];
+        selectedFiles[index + 1] = temp;
+
+        showPreview();
+    }
+};
+
+
+card.appendChild(remove);
+card.appendChild(number);
+card.appendChild(img);
+card.appendChild(up);
+card.appendChild(down);
+
+preview.appendChild(card);
 
     });
 }
