@@ -2,7 +2,68 @@
 <html lang="en">
 <head>
 
-<
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PDF Tools - Free Image to PDF Converter</title>
+
+<meta name="description" content="Convert JPG, PNG and other images to PDF online for free. Fast, secure and easy to use. Your files stay on your device.">
+<meta name="keywords" content="PDF Tools, Image to PDF, JPG to PDF, PNG to PDF, PDF Converter, Free PDF">
+<meta name="robots" content="index, follow">
+<meta name="author" content="PDF Tools">
+
+<link rel="canonical" href="https://sahbani49.github.io/pdf-tools/">
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "PDF Tools",
+  "url": "https://sahbani49.github.io/pdf-tools/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "Free online image to PDF converter."
+}
+</script>
+
+</head>
+
+<body>
+
+<header>
+<h1>PDF Tools</h1>
+<p>Free Online PDF Tools</p>
+</header>
+
+<div class="container">
+
+<h2>📄 Convert Images to PDF</h2>
+
+<p>
+Convert JPG, PNG and other image formats into a high-quality PDF file.
+Fast, free and secure. Your files stay on your device.
+</p>
+
+<p id="count" style="color:#1565c0;font-weight:bold;">
+No images selected
+</p>
+
+<label for="images" class="upload-box">
+
+<div class="upload-icon">📄</div>
+
+<h3>Drop your images here</h3>
+
+<p>or click to browse</p>
+
+<input
+type="file"
+id="images"
+accept="image/*"
 multiple
 onchange="previewImages()"
 hidden>
@@ -10,10 +71,6 @@ hidden>
 </label>
 
 <div id="preview"></div>
-
-<p style="color:#1565c0;font-weight:bold;">
-Use the arrows to reorder your images
-</p>
 
 <br>
 
@@ -23,13 +80,15 @@ Convert to PDF
 
 </div>
 
-<script src="script.js"></script>
 <footer style="text-align:center; margin-top:40px; padding:20px;">
 <a href="privacy.html">Privacy Policy</a> |
 <a href="about.html">About</a> |
 <a href="contact.html">Contact</a> |
-<a href="terms.html">Terms</a>|
-<a href="faq.html">FAQ</a> 
+<a href="terms.html">Terms</a> |
+<a href="faq.html">FAQ</a>
 </footer>
+
+<script src="script.js"></script>
+
 </body>
 </html>
