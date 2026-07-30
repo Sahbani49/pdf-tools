@@ -63,6 +63,7 @@ button{
     transition:.3s;
     display:block;
     margin:20px auto;
+    box-sizing:border-box;
 }
 
 button:hover{
