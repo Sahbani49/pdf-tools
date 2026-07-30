@@ -71,7 +71,6 @@ button:hover{
     margin-top:25px;
     width:100%;
 }
-}
 
 #preview img{
     width:120px;
@@ -99,7 +98,6 @@ footer{
     margin:25px 0;
     overflow:hidden;
 } 
-}
 
 .upload-box:hover{
     background:#eef6ff;
@@ -143,7 +141,6 @@ footer{
     align-items:center;
     width:100%;
 } 
-}
 
 .image-card img{
     width:120px;
