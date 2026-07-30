@@ -86,16 +86,20 @@ footer{
     color:#666;
     }
 .upload-box{
-    display:block;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     width:100%;
+    min-height:180px;
     border:3px dashed #42a5f5;
     border-radius:15px;
-    padding:40px 20px;
+    padding:20px;
     text-align:center;
     cursor:pointer;
     background:#f8fbff;
     transition:.3s;
-    margin:25px 0;
+    margin:20px 0;
     overflow:hidden;
 } 
 
@@ -105,14 +109,15 @@ footer{
 }
 
 .upload-icon{
-    font-size:60px;
-    margin-bottom:10px;
-}
+    font-size:48px;
+    margin-bottom:8px;
+} 
 
 .upload-box h3{
     color:#1565c0;
-    margin-bottom:8px;
-}
+    font-size:20px;
+    margin-bottom:6px;
+} 
 
 .upload-box p{
     color:#777;
