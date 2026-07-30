@@ -53,11 +53,15 @@ button{
     background:#1976d2;
     color:white;
     border:none;
-    padding:14px 30px;
+    width:100%;
+    max-width:350px;
+    padding:14px;
     font-size:17px;
-    border-radius:8px;
+    border-radius:10px;
     cursor:pointer;
     transition:.3s;
+    display:block;
+    margin:20px auto;
 }
 
 button:hover{
