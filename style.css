@@ -93,7 +93,8 @@ footer{
     text-align:center;
     padding:25px;
     color:#666;
-    }
+}
+
 .upload-box{
     display:flex;
     flex-direction:column;
