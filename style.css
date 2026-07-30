@@ -127,19 +127,7 @@ footer{
     color:#777;
 } 
 
-.remove-btn{
-    position:absolute;
-    top:5px;
-    right:5px;
-    background:#e53935;
-    color:white;
-    border:none;
-    width:28px;
-    height:28px;
-    border-radius:50%;
-    cursor:pointer;
-    z-index:2;
-}
+
 .image-card{
     position:relative;
     display:flex;
