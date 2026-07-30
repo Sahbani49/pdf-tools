@@ -206,8 +206,9 @@ footer{
     }
 
     .upload-box{
-        padding:30px 10px;
-    }
+    min-height:150px;
+    padding:15px;
+} 
 
     .upload-icon{
         font-size:45px;
