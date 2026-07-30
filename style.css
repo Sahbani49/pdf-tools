@@ -1,4 +1,6 @@
-*{
+*,
+*::before,
+*::after{
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -241,12 +243,6 @@ footer{
         padding:20px 10px;
     }
 
-    }
-*,
-*::before,
-*::after{
-    box-sizing:border-box;
-}
 
 img{
     max-width:100%;
